@@ -9,6 +9,15 @@ import { InstagramSection } from "@/src/components/home/InstagramSection"
 import { NewsletterSection } from "@/src/components/home/NewsletterSection"
 import { ProductGridSkeleton } from "@/src/components/shared/LoadingSkeleton"
 
+async function HeroSection() {
+  const banners = await prisma.banner.findMany({
+    where: { isActive: true },
+    orderBy: { order: "asc" },
+    take: 1,
+  })
+  return <Hero banners={banners.map(b => ({ title: b.title, subtitle: b.subtitle, imageUrl: b.imageUrl, linkUrl: b.linkUrl }))} />
+}
+
 async function NewArrivalsSection() {
   const products = await prisma.product.findMany({
     where: { status: "ACTIVE", isNewArrival: true },
@@ -45,7 +54,9 @@ async function CategoriesWithCount() {
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <Suspense fallback={<Hero />}>
+        <HeroSection />
+      </Suspense>
       <FeaturedCollections />
       <Suspense fallback={<ProductGridSkeleton />}>
         <NewArrivalsSection />

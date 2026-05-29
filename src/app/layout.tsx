@@ -1,16 +1,6 @@
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Providers } from "@/src/components/shared/Providers"
 import "./globals.css"
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-})
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-})
 
 export const metadata: Metadata = {
   title: "TERINO | Luxury Fashion Store",
@@ -37,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} dark`}>
+    <html lang="en" className="dark">
       <body className="min-h-screen bg-black text-white antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

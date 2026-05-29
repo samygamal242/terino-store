@@ -6,6 +6,7 @@ import {
   Package,
   Tags,
   Image as ImageIcon,
+  ShoppingCart,
   LogOut,
   ExternalLink,
 } from "lucide-react"
@@ -15,6 +16,7 @@ const links = [
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/categories", label: "Categories", icon: Tags },
   { href: "/admin/banners", label: "Banners", icon: ImageIcon },
+  { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
 ]
 
 export function AdminSidebar() {

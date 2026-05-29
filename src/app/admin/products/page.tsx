@@ -1,22 +1,39 @@
 import Link from "next/link"
 import { prisma } from "@/src/lib/prisma"
-import { Plus, Edit } from "lucide-react"
+import { Plus, Edit, ChevronLeft, ChevronRight } from "lucide-react"
 import { DeleteButton } from "./DeleteButton"
 
-export default async function AdminProductsPage() {
-  const products = await prisma.product.findMany({
-    orderBy: { createdAt: "desc" },
-    include: {
-      category: true,
-      images: { orderBy: { order: "asc" }, take: 1 },
-      _count: { select: { variants: true } },
-    },
-  })
+const PAGE_SIZE = 20
+
+interface AdminProductsPageProps {
+  searchParams: Promise<{ page?: string }>
+}
+
+export default async function AdminProductsPage({ searchParams }: AdminProductsPageProps) {
+  const { page } = await searchParams
+  const currentPage = Math.max(1, Number(page) || 1)
+  const skip = (currentPage - 1) * PAGE_SIZE
+
+  const [products, total] = await Promise.all([
+    prisma.product.findMany({
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: PAGE_SIZE,
+      include: {
+        category: true,
+        images: { orderBy: { order: "asc" }, take: 1 },
+        _count: { select: { variants: true } },
+      },
+    }),
+    prisma.product.count(),
+  ])
+
+  const totalPages = Math.ceil(total / PAGE_SIZE)
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-heading text-white">Products</h1>
+        <h1 className="text-2xl font-heading text-white">Products ({total})</h1>
         <Link
           href="/admin/products/new"
           className="flex items-center gap-2 bg-gold text-black px-4 py-2 text-sm uppercase tracking-[0.15em] font-medium hover:bg-white transition-colors"
@@ -91,6 +108,26 @@ export default async function AdminProductsPage() {
           </tbody>
         </table>
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <Link
+            href={`/admin/products?page=${currentPage - 1}`}
+            className={`p-2 text-white/30 hover:text-gold transition-colors ${currentPage <= 1 ? "pointer-events-none opacity-30" : ""}`}
+          >
+            <ChevronLeft size={18} />
+          </Link>
+          <span className="text-xs text-white/50">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Link
+            href={`/admin/products?page=${currentPage + 1}`}
+            className={`p-2 text-white/30 hover:text-gold transition-colors ${currentPage >= totalPages ? "pointer-events-none opacity-30" : ""}`}
+          >
+            <ChevronRight size={18} />
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

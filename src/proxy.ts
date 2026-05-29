@@ -5,7 +5,7 @@ import { verifyToken } from "./lib/auth"
 const adminPaths = ["/admin"]
 const publicAdminPaths = ["/admin/login"]
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname
 
   const isAdminPath = adminPaths.some((p) => path.startsWith(p))
