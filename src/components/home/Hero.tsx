@@ -40,7 +40,7 @@ export function Hero({ banners }: { banners?: HeroBanner[] }) {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl md:text-7xl lg:text-8xl font-heading text-white mb-6 tracking-wide"
         >
-          {banner?.title || BRAND.name}
+          {BRAND.name}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
