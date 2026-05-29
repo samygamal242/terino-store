@@ -1,10 +1,12 @@
 "use client"
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { useI18n } from "@/src/lib/i18n-context"
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+  const { t } = useI18n()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,20 +38,20 @@ export function NewsletterSection() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">
-            Stay Connected
+            {t("newsletter.tagline")}
           </p>
           <h2 className="text-3xl md:text-4xl font-heading text-white mb-4">
-            Join the TERINO Community
+            {t("newsletter.title")}
           </h2>
           <p className="text-white/50 text-sm mb-8 max-w-sm mx-auto">
-            Be the first to know about new collections, exclusive offers, and luxury insights.
+            {t("newsletter.description")}
           </p>
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email address"
+              placeholder={t("newsletter.placeholder")}
               required
               className="flex-1 bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-gold transition-colors"
             />
@@ -57,14 +59,14 @@ export function NewsletterSection() {
               type="submit"
               className="bg-gold text-black px-8 py-3 text-sm uppercase tracking-[0.2em] font-medium hover:bg-white transition-all duration-300"
             >
-              Subscribe
+              {t("newsletter.submit")}
             </button>
           </form>
           {status === "success" && (
-            <p className="text-green-400 text-sm mt-3">Thank you for subscribing!</p>
+            <p className="text-green-400 text-sm mt-3">{t("newsletter.success")}</p>
           )}
           {status === "error" && (
-            <p className="text-red-400 text-sm mt-3">Something went wrong. Please try again.</p>
+            <p className="text-red-400 text-sm mt-3">{t("newsletter.error")}</p>
           )}
         </motion.div>
       </div>

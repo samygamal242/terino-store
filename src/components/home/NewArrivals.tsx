@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { SectionTitle } from "@/src/components/shared/SectionTitle"
 import { ProductCard } from "@/src/components/product/ProductCard"
+import { useI18n } from "@/src/lib/i18n-context"
 
 interface NewArrivalsProps {
   products: Array<{
@@ -17,12 +18,14 @@ interface NewArrivalsProps {
 }
 
 export function NewArrivals({ products }: NewArrivalsProps) {
+  const { t } = useI18n()
+
   if (!products.length) return null
 
   return (
     <section className="py-24 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle title="New Arrivals" subtitle="Latest" />
+        <SectionTitle title={t("newArrivals.title")} subtitle={t("newArrivals.subtitle")} />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product, i) => (
             <motion.div
@@ -46,7 +49,7 @@ export function NewArrivals({ products }: NewArrivalsProps) {
             href="/products"
             className="inline-block border border-white/20 text-white px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300"
           >
-            View All Products
+            {t("newArrivals.viewAll")}
           </Link>
         </motion.div>
       </div>

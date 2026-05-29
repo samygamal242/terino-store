@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { SectionTitle } from "@/src/components/shared/SectionTitle"
 import { CATEGORIES } from "@/src/lib/constants"
+import { useI18n } from "@/src/lib/i18n-context"
 
 const categoryImages: Record<string, string> = {
   shoes: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop",
@@ -12,10 +13,12 @@ const categoryImages: Record<string, string> = {
 }
 
 export function FeaturedCollections() {
+  const { t } = useI18n()
+
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle title="Collections" subtitle="Featured" />
+        <SectionTitle title={t("collections.title")} subtitle={t("collections.subtitle")} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {CATEGORIES.map((cat, i) => (
             <motion.div
@@ -36,9 +39,9 @@ export function FeaturedCollections() {
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <h3 className="text-2xl md:text-3xl font-heading text-white mb-2">{cat.name}</h3>
+                    <h3 className="text-2xl md:text-3xl font-heading text-white mb-2">{t(`category.${cat.slug}`)}</h3>
                     <p className="text-xs uppercase tracking-[0.2em] text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      Explore Collection
+                      {t("collections.explore")}
                     </p>
                   </div>
                 </div>

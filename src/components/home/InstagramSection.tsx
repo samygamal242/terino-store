@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import { BRAND } from "@/src/lib/constants"
 import { Camera } from "lucide-react"
+import { useI18n } from "@/src/lib/i18n-context"
 
 const instagramPosts = [
   "https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=2080&auto=format&fit=crop",
@@ -13,6 +14,8 @@ const instagramPosts = [
 ]
 
 export function InstagramSection() {
+  const { t } = useI18n()
+
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
@@ -22,7 +25,7 @@ export function InstagramSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">Follow Us</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">{t("instagram.followUs")}</p>
           <a
             href={BRAND.instagram}
             target="_blank"

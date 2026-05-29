@@ -2,8 +2,10 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { BRAND } from "@/src/lib/constants"
+import { useI18n } from "@/src/lib/i18n-context"
 
 export function BrandStory() {
+  const { t } = useI18n()
   return (
     <section className="py-24 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-6">
@@ -25,26 +27,22 @@ export function BrandStory() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">Our Story</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">{t("brandStory.tagline")}</p>
             <h2 className="text-3xl md:text-5xl font-heading text-white mb-8">
-              The Art of Luxury
+              {t("brandStory.title")}
             </h2>
             <div className="w-12 h-[1px] bg-gold mb-8" />
             <p className="text-white/60 leading-relaxed mb-6">
-              At {BRAND.name}, we believe fashion is more than clothing — it's an expression of
-              identity. Each piece in our collection is meticulously curated to embody elegance,
-              sophistication, and timeless style.
+              {t("brandStory.p1")}
             </p>
             <p className="text-white/40 leading-relaxed mb-8">
-              Inspired by the world's most prestigious fashion houses, we bring you a selection that
-              transcends trends. From premium shoes and sneakers to designer bags and accessories,
-              every item tells a story of craftsmanship and luxury.
+              {t("brandStory.p2")}
             </p>
             <Link
               href="/about"
               className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
             >
-              Read More
+              {t("brandStory.readMore")}
               <span className="text-lg">→</span>
             </Link>
           </motion.div>

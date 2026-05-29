@@ -1,8 +1,12 @@
+"use client"
 import Link from "next/link"
 import { BRAND } from "@/src/lib/constants"
 import { Camera, MessageCircle, ChevronRight } from "lucide-react"
+import { useI18n } from "@/src/lib/i18n-context"
 
 export function Footer() {
+  const { t } = useI18n()
+
   return (
     <footer className="bg-[#0A0A0A] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 py-20">
@@ -13,16 +17,20 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-[0.2em] text-white/80 mb-6">Quick Links</h4>
+            <h4 className="text-sm uppercase tracking-[0.2em] text-white/80 mb-6">{t("footer.quickLinks")}</h4>
             <ul className="space-y-3">
-              {["Products", "About", "Contact"].map((link) => (
-                <li key={link}>
+              {[
+                { name: t("nav.allProducts"), href: "/products" },
+                { name: t("nav.about"), href: "/about" },
+                { name: t("nav.contact"), href: "/contact" }
+              ].map((link) => (
+                <li key={link.href}>
                   <Link
-                    href={`/${link.toLowerCase()}`}
+                    href={link.href}
                     className="text-sm text-white/50 hover:text-gold transition-colors flex items-center gap-2"
                   >
                     <ChevronRight size={12} />
-                    {link}
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -30,16 +38,21 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-[0.2em] text-white/80 mb-6">Categories</h4>
+            <h4 className="text-sm uppercase tracking-[0.2em] text-white/80 mb-6">{t("footer.categories")}</h4>
             <ul className="space-y-3">
-              {["Shoes", "Sneakers", "Bags", "Accessories"].map((cat) => (
-                <li key={cat}>
+              {[
+                { name: t("category.shoes"), href: "/categories/shoes" },
+                { name: t("category.sneakers"), href: "/categories/sneakers" },
+                { name: t("category.bags"), href: "/categories/bags" },
+                { name: t("category.accessories"), href: "/categories/accessories" }
+              ].map((cat) => (
+                <li key={cat.href}>
                   <Link
-                    href={`/categories/${cat.toLowerCase()}`}
+                    href={cat.href}
                     className="text-sm text-white/50 hover:text-gold transition-colors flex items-center gap-2"
                   >
                     <ChevronRight size={12} />
-                    {cat}
+                    {cat.name}
                   </Link>
                 </li>
               ))}
@@ -47,7 +60,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-[0.2em] text-white/80 mb-6">Connect</h4>
+            <h4 className="text-sm uppercase tracking-[0.2em] text-white/80 mb-6">{t("footer.connect")}</h4>
             <div className="flex flex-col gap-4">
               <a
                 href={`https://wa.me/${BRAND.whatsapp}`}
@@ -75,9 +88,9 @@ export function Footer() {
 
         <div className="border-t border-white/5 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30">
-            &copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {BRAND.name}. {t("footer.rights")}
           </p>
-          <p className="text-xs text-white/20">Luxury Redefined</p>
+          <p className="text-xs text-white/20">{t("footer.luxury")}</p>
         </div>
       </div>
     </footer>

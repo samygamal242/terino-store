@@ -61,14 +61,14 @@ export function Header() {
               href={`/categories/${cat.slug}`}
               className="text-sm uppercase tracking-[0.15em] text-white/80 hover:text-gold transition-colors duration-300"
             >
-              {cat.name}
+              {t(`category.${cat.slug}`)}
             </Link>
           ))}
           <Link
             href="/products"
             className="text-sm uppercase tracking-[0.15em] text-white/80 hover:text-gold transition-colors duration-300"
           >
-            All
+            {t("nav.all")}
           </Link>
         </nav>
 
@@ -166,7 +166,7 @@ export function Header() {
                   onClick={() => setIsOpen(false)}
                   className="text-lg uppercase tracking-[0.15em] text-white/80 hover:text-gold transition-colors"
                 >
-                  {cat.name}
+                  {t(`category.${cat.slug}`)}
                 </Link>
               ))}
               <Link
@@ -174,21 +174,21 @@ export function Header() {
                 onClick={() => setIsOpen(false)}
                 className="text-lg uppercase tracking-[0.15em] text-white/80 hover:text-gold transition-colors"
               >
-                All Products
+                {t("nav.allProducts")}
               </Link>
               <Link
                 href="/about"
                 onClick={() => setIsOpen(false)}
                 className="text-lg uppercase tracking-[0.15em] text-white/80 hover:text-gold transition-colors"
               >
-                About
+                {t("nav.about")}
               </Link>
               <Link
                 href="/contact"
                 onClick={() => setIsOpen(false)}
                 className="text-lg uppercase tracking-[0.15em] text-white/80 hover:text-gold transition-colors"
               >
-                Contact
+                {t("nav.contact")}
               </Link>
             </nav>
           </motion.div>
