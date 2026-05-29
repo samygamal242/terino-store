@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { BRAND } from "@/src/lib/constants"
 import { useI18n } from "@/src/lib/i18n-context"
 
 interface HeroBanner {
@@ -31,7 +32,7 @@ export function Hero({ banners }: { banners?: HeroBanner[] }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xs uppercase tracking-[0.3em] text-gold mb-6"
         >
-          {banner?.title || t("hero.tagline")}
+          {banner?.subtitle || BRAND.tagline}
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +40,7 @@ export function Hero({ banners }: { banners?: HeroBanner[] }) {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl md:text-7xl lg:text-8xl font-heading text-white mb-6 tracking-wide"
         >
-          {banner?.subtitle || "TERINO"}
+          {banner?.title || BRAND.name}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}

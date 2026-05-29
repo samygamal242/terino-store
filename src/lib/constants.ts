@@ -1,6 +1,6 @@
 export const BRAND = {
   name: "TERINO",
-  tagline: "Luxury Redefined",
+  tagline: "Discover the new season of luxury",
   description: "Premium fashion for the discerning individual",
   email: "hello@terino.com",
   phone: "+201234567890",
