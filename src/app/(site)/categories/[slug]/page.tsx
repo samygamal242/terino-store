@@ -4,7 +4,7 @@ import { Suspense } from "react"
 import { prisma } from "@/src/lib/prisma"
 import { ProductGrid } from "@/src/components/product/ProductGrid"
 import { ProductGridSkeleton } from "@/src/components/shared/LoadingSkeleton"
-import type { Product, ProductImage, Category } from "@/src/generated/prisma/client"
+import type { Product, ProductImage, Category } from "@prisma/client"
 
 interface ProductWithRelations extends Product {
   images: ProductImage[]
